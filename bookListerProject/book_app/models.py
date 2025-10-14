@@ -8,7 +8,7 @@ class Book(models.Model):
     # class similar to an enum to list all genre options (will be a dropdown menu in GUI)
     class Genres(models.TextChoices):
         FANTASY = 'Fantasy'
-        SCI_FI = 'Science Fiction'
+        SCIENCE_FICTION = 'Science Fiction'
         DYSTOPIAN = 'Dystopian'
         ADVENTURE = 'Adventure'
         ROMANCE = 'Romance'
@@ -40,10 +40,10 @@ class Book(models.Model):
 
     # class for status choices
     class Status(models.TextChoices):
-        N_A = "Not Started"
+        NOT_STARTED = "Not Started"
         READING = "Reading"
-        DNF = "Did Not Finish"
-        DONE = 'FINISHED'
+        DID_NOT_FINISH = "Did Not Finish"
+        FINISHED = 'Done'
 
     status = models.CharField(
         choices=Status.choices,
@@ -52,9 +52,9 @@ class Book(models.Model):
 
     #class for media types
     class MediaType(models.TextChoices):
-        E = "Ebook"
-        A = 'Audiobook'
-        P = 'Physical Copy'
+        EBOOK = "E"
+        AUDIOBOOK = 'A'
+        PHYSICAL_COPY = 'P'
 
     media_type = models.CharField(
         choices=MediaType.choices,
