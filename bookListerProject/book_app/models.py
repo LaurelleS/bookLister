@@ -8,7 +8,7 @@ class Book(models.Model):
     # class similar to an enum to list all genre options (will be a dropdown menu in GUI)
     class Genres(models.TextChoices):
         FANTASY = 'Fantasy'
-        SCI-FI = 'Science Fiction'
+        SCI_FI = 'Science Fiction'
         DYSTOPIAN = 'Dystopian'
         ADVENTURE = 'Adventure'
         ROMANCE = 'Romance'
@@ -27,7 +27,7 @@ class Book(models.Model):
         TRUE_CRIME = 'True Crime' 
 
     genres = models.CharField(
-        choices=Genres.choices
+        choices=Genres.choices,
         max_length=100
     )
     date_started = models.DateField(
@@ -46,7 +46,7 @@ class Book(models.Model):
         DONE = 'FINISHED'
 
     status = models.CharField(
-        choices=Status.choices
+        choices=Status.choices,
         max_length=50
     )
 
@@ -57,9 +57,9 @@ class Book(models.Model):
         P = 'Physical Copy'
 
     media_type = models.CharField(
-        choices=MediaType.choices
+        choices=MediaType.choices,
         max_length=50
     )
 
-    # uploading photos may require install of Pillow (pip install Pillow)
-    cover_photo = models.ImageField( upload_to=lambda instance, filename : return 'user_{0}/{1}'.format(instance.user.id, filename) )
+    # uploading photos may require install of Pillow (python -m pip install Pillow)
+    cover_photo = models.ImageField( upload_to=lambda instance, filename : 'user_{0}/{1}'.format(instance.user.id, filename) )
