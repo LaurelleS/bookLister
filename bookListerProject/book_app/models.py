@@ -1,3 +1,65 @@
 from django.db import models
+import datetime
 
-# Create your models here.
+class Book(models.Model):
+    title = models.CharField(max_length=200)
+    author = models.CharField(max_length=200)
+
+    # class similar to an enum to list all genre options (will be a dropdown menu in GUI)
+    class Genres(models.TextChoices):
+        FANTASY = 'Fantasy'
+        SCI-FI = 'Science Fiction'
+        DYSTOPIAN = 'Dystopian'
+        ADVENTURE = 'Adventure'
+        ROMANCE = 'Romance'
+        MYSTERY = 'Mystery'
+        HORROR = 'Horror'
+        THRILLER = 'Thriller'
+        LGBTQ = 'LGBTQ'
+        HISTORICAL_FICTION = 'Historical Fiction'
+        YOUNG_ADULT = 'Young Adult'
+        CHILD_FICTION = "Children's Fiction"
+        AUTOBIOGRAPHY = 'Autobiography'
+        BIOGRAPHY = 'Biography'
+        SELF_HELP = 'Self-Help'
+        HISTORY = 'History'
+        HOBBIES = 'Hobbies and Crafts'
+        TRUE_CRIME = 'True Crime' 
+
+    genres = models.CharField(
+        choices=Genres.choices
+        max_length=100
+    )
+    date_started = models.DateField(
+        default=datetime.date.today # set default start date to when entry is created
+    )
+    date_ended = models.DateField()
+
+    notes = models.TextField()
+    rating = models.SmallIntegerField()
+
+    # class for status choices
+    class Status(models.TextChoices):
+        N_A = "Not Started"
+        READING = "Reading"
+        DNF = "Did Not Finish"
+        DONE = 'FINISHED'
+
+    status = models.CharField(
+        choices=Status.choices
+        max_length=50
+    )
+
+    #class for media types
+    class MediaType(models.TextChoices):
+        E = "Ebook"
+        A = 'Audiobook'
+        P = 'Physical Copy'
+
+    media_type = models.CharField(
+        choices=MediaType.choices
+        max_length=50
+    )
+
+    # uploading photos may require install of Pillow (pip install Pillow)
+    cover_photo = models.ImageField( upload_to=lambda instance, filename : return 'user_{0}/{1}'.format(instance.user.id, filename) )
