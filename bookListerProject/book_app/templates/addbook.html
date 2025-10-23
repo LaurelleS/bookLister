@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Reader's Hub</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.3/dist/journal/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<!-- CSS -->
+<style>
+    .float {
+        display: inline-block;
+        text-align: left;
+        width: 50%;
+        height: auto;
+    }
+    .star-rating {
+        direction: rtl;
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .star-rating input {
+        display: none;
+    }
+    .star-rating label {
+        color: #ddd;
+        font-size: 24px;
+        padding: 0 2px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .star-rating label:hover,
+    .star-rating label:hover~label,
+    .star-rating input:checked~label {
+        color: #ffc107;
+    }
+</style>
+<body>
+    <!-- columns of basic info an cover photo -->
+    <div class="container-fluid">
+        <!-- title, author, genre, rating, status -->
+        <div class="float">
+            <div>
+                <label class="form-label mt-4">Title</label>
+                <input type="password" class="form-control" id="title" autocomplete="off">
+            </div>
+            <div>
+                <label class="form-label mt-4">Author</label>
+                <input type="password" class="form-control" id="author" autocomplete="off">
+            </div>
+            <div>
+                <label class="form-label mt-4">Genre</label>
+                <select class="form-select" id="genre">
+                    
+                </select>
+            </div>
+            <div class="col-md-6">
+                <div class="star-rating-animated-stars">
+                    <input type="radio" id="star5" name="rating" value="5">
+                    <label for="star5" class="bi bi-star-fill"></label>
+                    <input type="radio" id="star4" name="rating" value="4">
+                    <label for="star4" class="bi bi-star-fill"></label>
+                    <input type="radio" id="star3" name="rating" value="3">
+                    <label for="star3" class="bi bi-star-fill"></label>
+                    <input type="radio" id="star2" name="rating" value="2">
+                    <label for="star2" class="bi bi-star-fill"></label>
+                    <input type="radio" id="star1" name="rating" value="1">
+                    <label for="star1" class="bi bi-star-fill"></label>
+                </div>
+                <script>
+                    document.querySelectorAll('.star-rating:not(.readonly) label').forEach(star => {
+                        star.addEventListener('click', function() {
+                            this.style.transform = 'scale(1.2)';
+                            setTimeout(() => {
+                                this.style.transform = 'scale(1)';
+                            }, 200);
+                        });
+                    });
+                </script>
+            </div>
+
+        </div>
+        <!-- photo -->
+        <div>
+
+        </div>
+    </div>
+</body>

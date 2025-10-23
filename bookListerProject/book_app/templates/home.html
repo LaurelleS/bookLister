@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Reader's Hub</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.3/dist/journal/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+    <!-- CSS -->
+    <style>
+        h1 {text-align: center;}
+        div {padding-top: 20px;
+            padding-bottom: 20px;
+        }
+        .center {
+            margin:auto;
+            width: 50%;
+        }
+    </style>
+    <body>
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1>My Books</h1>
+        </div>
+        <!-- Display 5 most recent books in a table -->
+         <div class="container">
+            <h2>Recently Added</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                    <tbody>
+                        {% if recents %}
+                            {% for book in recents %}
+                                <tr>
+                                    <td>{{book.title}}</td>
+                                    <td>{{book.author}}</td>
+                                    <td>{{book.status}}</td>
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                        <tr>
+                            <td colspan="3" class="text-muted">No books added yet.</td>
+                        </tr>
+                        {% endif %}
+                    </tbody>
+            </table>
+        </div>
+         <!-- buttons -->
+        <div class="center">
+            <a href="{% url 'viewall' %}" class="btn btn-primary">View All</a>
+            <button type="button" class="btn btn-primary">Add Book</button>
+        </div>
+    </body>
+
+</html>

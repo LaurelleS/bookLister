@@ -63,3 +63,6 @@ class Book(models.Model):
 
     # uploading photos may require install of Pillow (python -m pip install Pillow)
     cover_photo = models.ImageField( upload_to=lambda instance, filename : 'user_{0}/{1}'.format(instance.user.id, filename) )
+
+    def __str__(self):
+        return self.title
