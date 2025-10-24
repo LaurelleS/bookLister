@@ -25,6 +25,13 @@ def addBook(request):
 
         return redirect('allbooks')
 
+def deleteBook(request, book_id):
+    if request.method == 'POST':
+        book = get_object_or_404(Book, id=book_id)
+        book.delete()
+        return redirect('allbooks')
+    return render(request, 'allbooks.html')
+
 def allbooks(request):
     if request.method == 'GET':
         all = Book.objects.all()

@@ -37,11 +37,11 @@ class Book(models.Model):
     date_started = models.DateField(
         default=datetime.date.today # set default start date to when entry is created
     )
-    date_ended = models.DateField()
+    date_ended = models.DateField(blank=True)
 
     notes = models.TextField(blank=True)
     ratings_choices = [(1,'1'), (2,'2'), (3,'3'), (4,'4'), (5,'5')]
-    rating = models.IntegerField(choices=ratings_choices, default=1, blank=True)
+    rating = models.IntegerField(choices=ratings_choices, default=1)
 
     # class for status choices
     class Status(models.TextChoices):

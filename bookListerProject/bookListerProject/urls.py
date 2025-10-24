@@ -23,13 +23,15 @@ from book_app.views import home
 from book_app.views import allbooks
 from book_app.views import addBook
 from book_app.views import viewBook
+from book_app.views import deleteBook
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name='home'),
     path('allbooks/', allbooks, name='allbooks'),
     path('add/', addBook, name='addBook'),
-    path('viewbook/<int:book_id>/', viewBook, name='viewBook')
+    path('viewbook/<int:book_id>/', viewBook, name='viewBook'),
+    path('deleteBook/<int:book_id>/', deleteBook, name='deleteBook'),
 ]
 
 if settings.DEBUG:

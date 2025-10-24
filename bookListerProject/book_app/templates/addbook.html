@@ -26,6 +26,14 @@
         padding-bottom: 25px;
         padding-left: 80px;
     }
+    .impbtn {
+         text-align: center;
+          padding-top: 20px;
+          padding-bottom: 20px;
+    }
+    .right {
+        text-align: right
+    }
     .star-rating {
         direction: rtl;
         display: inline-block;
@@ -102,12 +110,21 @@
                 {{ form.notes.label_tag }} {{ form.notes }}
             </div>
         </div>
-        <div class="header">
-            <button type="submit" class="btn btn-success">
-                {% if form.instance.pk %}Save Changes
-                {% else %}Add Book{% endif %}
-            </button>
-        </div>
+
+    <div class="impbtn">
+        <button type="submit" class="btn btn-success" name="submit">
+            {% if form.instance.pk %}Save Changes
+            {% else %}Add Book{% endif %}
+        </button>
+    </div>
     </form>
+    {% if form.instance.pk %}
+    <div class="right">
+        <form method="post" action="{% url 'deleteBook' form.instance.id %}" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this book?');">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger" name="delete">Delete</button>
+        </form>
+    </div>
+    {% endif %}
 </body>
 </html>
