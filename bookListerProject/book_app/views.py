@@ -31,4 +31,4 @@ def allbooks(request):
         context = {
             "all" : all
         }
-        return render(request, 'home.html', context)
+        return render(request, 'allbooks.html', context)
