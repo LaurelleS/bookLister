@@ -26,7 +26,7 @@
                         {% if all %}
                             {% for book in all %}
                                 <tr>
-                                    <td>{{book.title}}</td>
+                                    <td><a href="{% url 'viewBook' book.id %}">{{book.title}}</a></td>
                                     <td>{{book.author}}</td>
                                     <td>{{book.status}}</td>
                                 </tr>
@@ -38,5 +38,8 @@
                         {% endif %}
                     </tbody>
             </table>
+   </div>
+   <div class=container>
+    <a href="{% url 'home' %}">Back To Home</a>
    </div>
 </body>

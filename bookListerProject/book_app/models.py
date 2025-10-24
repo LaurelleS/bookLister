@@ -39,8 +39,9 @@ class Book(models.Model):
     )
     date_ended = models.DateField()
 
-    notes = models.TextField()
-    rating = models.SmallIntegerField()
+    notes = models.TextField(blank=True)
+    ratings_choices = [(1,'1'), (2,'2'), (3,'3'), (4,'4'), (5,'5')]
+    rating = models.IntegerField(choices=ratings_choices, default=1, blank=True)
 
     # class for status choices
     class Status(models.TextChoices):
@@ -66,7 +67,7 @@ class Book(models.Model):
     )
 
     # uploading photos may require install of Pillow (python -m pip install Pillow)
-    cover_photo = models.ImageField(upload_to=cover_upload_path)
+    cover_photo = models.ImageField(upload_to=cover_upload_path, blank=True)
 
     def __str__(self):
         return self.title

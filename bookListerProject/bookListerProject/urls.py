@@ -22,12 +22,14 @@ from django.urls import path
 from book_app.views import home
 from book_app.views import allbooks
 from book_app.views import addBook
+from book_app.views import viewBook
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home),
+    path('', home, name='home'),
     path('allbooks/', allbooks, name='allbooks'),
     path('add/', addBook, name='addBook'),
+    path('viewbook/<int:book_id>/', viewBook, name='viewBook')
 ]
 
 if settings.DEBUG:

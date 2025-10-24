@@ -51,7 +51,13 @@
 </style>
 <body>
     <div class="page-header">
-        <h1 class="header">New Book</h1>
+        <h1 class="header">
+           {% if form.instance.pk %}
+           View Book
+           {% else %}
+           Add Book 
+           {% endif %}
+        </h1>
     </div>
     <form method="post" enctype="multipart/form-data">
        {% csrf_token %}
@@ -72,16 +78,14 @@
         <div class="col-md-6">
             <label>Rating</label>
             <div class="star-rating">
-                <input type="radio" id="star5" name="rating" value="5">
-                <label for="star5" class="bi bi-star-fill"></label>
-                <input type="radio" id="star4" name="rating" value="4">
-                <label for="star4" class="bi bi-star-fill"></label>
-                <input type="radio" id="star3" name="rating" value="3">
-                <label for="star3" class="bi bi-star-fill"></label>
-                <input type="radio" id="star2" name="rating" value="2">
-                <label for="star2" class="bi bi-star-fill"></label>
-                <input type="radio" id="star1" name="rating" value="1">
-                <label for="star1" class="bi bi-star-fill"></label>
+                {% for value, label in form.rating.field.choices %}
+                    <input type="radio" id="star{{ value }}" name="{{ form.rating.name }}" value="{{ value }}"
+                        {% if form.instance.pk %}
+                            {% if form.instance.rating == value %} checked {% endif %}
+                        {% endif %}>
+                        <label for="star{{ value }}" class="bi bi-star-fill"></label>       
+                {% endfor %}
+      
             </div>
             <script>
                 document.querySelectorAll('.star-rating:not(.readonly) label').forEach(star => {
@@ -99,7 +103,10 @@
             </div>
         </div>
         <div class="header">
-            <button type="submit" class="btn btn-success">Add Book</button>
+            <button type="submit" class="btn btn-success">
+                {% if form.instance.pk %}Save Changes
+                {% else %}Add Book{% endif %}
+            </button>
         </div>
     </form>
 </body>
