@@ -19,6 +19,13 @@
         height: auto;
         vertical-align: top;
     }
+    .header {
+        text-align: center;
+        padding-top: 50px;
+        padding-right: 30px;
+        padding-bottom: 25px;
+        padding-left: 80px;
+    }
     .star-rating {
         direction: rtl;
         display: inline-block;
@@ -43,82 +50,56 @@
     }
 </style>
 <body>
+    <div class="page-header">
+        <h1 class="header">New Book</h1>
+    </div>
     <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <!-- columns of basic info and cover photo -->
-        <div class="container-fluid">
-            <!-- title, author, genre, rating, status -->
-            <div class="float">
-                <!-- title -->
-                <div>
-                    <label class="form-label mt-4">Title</label>
-                    <input type="text" class="form-control" name="title" autocomplete="off">
-                </div>
-                <!-- author -->
-                <div>
-                    <label class="form-label mt-4">Author</label>
-                    <input type="text" class="form-control" name="author" autocomplete="off">
-                </div>
-                <!-- genre -->
-                <div>
-                    <label class="form-label mt-4">Genre</label>
-                    <div>
-                        
-                        {{ gform.as_p }}
-                    </div>
-                </div>
-                <!-- star rating -->
-                <div class="col-md-6">
-                    <div class="star-rating">
-                        <input type="radio" id="star5" name="rating" value="5">
-                        <label for="star5" class="bi bi-star-fill"></label>
-                        <input type="radio" id="star4" name="rating" value="4">
-                        <label for="star4" class="bi bi-star-fill"></label>
-                        <input type="radio" id="star3" name="rating" value="3">
-                        <label for="star3" class="bi bi-star-fill"></label>
-                        <input type="radio" id="star2" name="rating" value="2">
-                        <label for="star2" class="bi bi-star-fill"></label>
-                        <input type="radio" id="star1" name="rating" value="1">
-                        <label for="star1" class="bi bi-star-fill"></label>
-                    </div>
-                    <script>
-                        document.querySelectorAll('.star-rating:not(.readonly) label').forEach(star => {
-                            star.addEventListener('click', function() {
-                                this.style.transform = 'scale(1.2)';
-                                setTimeout(() => {
-                                    this.style.transform = 'scale(1)';
-                                }, 200);
-                            });
-                        });
-                    </script>
-                </div>
-                <!-- status -->
-                <div>
-                    <label class="form-label mt-4">Status</label>
-                    <div>
-                        
-                        {{ sform.as_p }}
-                    </div>
-                </div>
+       {% csrf_token %}
 
-            </div>
-            <!-- photo -->
-            <div class="float">
-                <label class="form-label mt-4">Choose a cover photo</label>
-                    <div>
-                       
-                        {{ cform.as_p }}
-                    </div>
-            </div>
-            <!-- end of two column layout -->
+        <!-- All fields except rating -->
+        <div class="row">
+    <div class="col-md-6">
+        {{ form.title.label_tag }} {{ form.title }}
+        {{ form.author.label_tag }} {{ form.author }}
+        {{ form.genre.label_tag }} {{ form.genre }}
+        {{ form.status.label_tag }} {{ form.status }}
+        {{ form.media_type.label_tag }} {{ form.media_type }}
+        {{ form.date_started.label_tag }} {{ form.date_started }}
+        {{ form.date_ended.label_tag }} {{ form.date_ended }}
+    </div>
 
-            <div>
-                <label class="form-label mt-4">Notes</label>
-                <textarea class="form-control" name="notes" rows="10"></textarea>
+        <!-- star rating -->
+        <div class="col-md-6">
+            <label>Rating</label>
+            <div class="star-rating">
+                <input type="radio" id="star5" name="rating" value="5">
+                <label for="star5" class="bi bi-star-fill"></label>
+                <input type="radio" id="star4" name="rating" value="4">
+                <label for="star4" class="bi bi-star-fill"></label>
+                <input type="radio" id="star3" name="rating" value="3">
+                <label for="star3" class="bi bi-star-fill"></label>
+                <input type="radio" id="star2" name="rating" value="2">
+                <label for="star2" class="bi bi-star-fill"></label>
+                <input type="radio" id="star1" name="rating" value="1">
+                <label for="star1" class="bi bi-star-fill"></label>
             </div>
+            <script>
+                document.querySelectorAll('.star-rating:not(.readonly) label').forEach(star => {
+                    star.addEventListener('click', function() {
+                        this.style.transform = 'scale(1.2)';
+                        setTimeout(() => {
+                            this.style.transform = 'scale(1)';
+                        }, 200);
+                    });
+                });
+            </script>
             <div>
-                <button type="submit" class="btn btn-success">Add Book</button>
+                {{ form.cover_photo.label_tag }} {{ form.cover_photo }}
+                {{ form.notes.label_tag }} {{ form.notes }}
             </div>
+        </div>
+        <div class="header">
+            <button type="submit" class="btn btn-success">Add Book</button>
         </div>
     </form>
 </body>

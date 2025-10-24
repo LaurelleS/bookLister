@@ -1,6 +1,10 @@
 from django.db import models
 import datetime
 
+def cover_upload_path(instance, filename):
+    return f'book_{instance.id}/{filename}'
+
+
 class Book(models.Model):
     title = models.CharField(max_length=200)
     author = models.CharField(max_length=200)
@@ -62,7 +66,7 @@ class Book(models.Model):
     )
 
     # uploading photos may require install of Pillow (python -m pip install Pillow)
-    cover_photo = models.ImageField( upload_to=lambda instance, filename : 'user_{0}/{1}'.format(instance.user.id, filename) )
+    cover_photo = models.ImageField(upload_to=cover_upload_path)
 
     def __str__(self):
         return self.title

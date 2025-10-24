@@ -12,5 +12,31 @@
 </head>
 
 <body>
-   
+   <div class="container">
+        <h2>All Books</h2>
+        <table class="table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                    <tbody>
+                        {% if all %}
+                            {% for book in all %}
+                                <tr>
+                                    <td>{{book.title}}</td>
+                                    <td>{{book.author}}</td>
+                                    <td>{{book.status}}</td>
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                        <tr>
+                            <td colspan="3" class="text-muted">No books added yet.</td>
+                        </tr>
+                        {% endif %}
+                    </tbody>
+            </table>
+   </div>
 </body>

@@ -1,8 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Book
 from .forms import GenreForm
 from .forms import StatusForm
-from .forms import CoverForm
+from .forms import BookForm
 
 def home(request):
     recents = Book.objects.order_by('-id')[:5]
@@ -13,40 +13,22 @@ def home(request):
 
 def addBook(request):
     if request.method == 'GET':
-        gform = GenreForm()
-        sform = StatusForm()
-        cform = CoverForm()
+        form = BookForm()
         context = {
-            gform : 'gform',
-            sform : 'sform',
-            cform : 'cform',
+            'form' : form,
         }
         return render(request, 'addbook.html', context)
     else:
-        title = request.POST.get("title")
-        author = request.POST.get("author")
-        gform = GenreForm(request.POST)
-        rating = int(request.POST.get("rating"))
-        sform = StatusForm(request.POST)
-        cform = CoverForm(request.POST, request.FILES)
+        form = BookForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
 
-        book = Book(
-            title=title,
-            author=author,
-            rating=rating,
-        )
-        book.save()
-        forms = [gform, sform, cform]
-        for form in forms:
-            if form.is_valid():
-                val = form.save(commit=False)
-                val.book = book
-                val.save()
-
-        return redirect('allbooks.html')
+        return redirect('allbooks')
 
 def allbooks(request):
-    context = {
-        
-    }
-    return render(request, 'home.html', context)
+    if request.method == 'GET':
+        all = Book.objects.all()
+        context = {
+            "all" : all
+        }
+        return render(request, 'home.html', context)
