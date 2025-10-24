@@ -37,7 +37,7 @@ class Book(models.Model):
     date_started = models.DateField(
         default=datetime.date.today # set default start date to when entry is created
     )
-    date_ended = models.DateField(blank=True)
+    date_ended = models.DateField(blank=True, null=True)
 
     notes = models.TextField(blank=True)
     ratings_choices = [(1,'1'), (2,'2'), (3,'3'), (4,'4'), (5,'5')]
