@@ -26,7 +26,7 @@ class Book(models.Model):
         HOBBIES = 'Hobbies and Crafts'
         TRUE_CRIME = 'True Crime' 
 
-    genres = models.CharField(
+    genre = models.CharField(
         choices=Genres.choices,
         max_length=100
     )
